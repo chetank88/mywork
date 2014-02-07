@@ -1,0 +1,31 @@
+#include<unistd.h>
+#include<unistd.h>
+#include<unistd.h>
+#include<errno.h>
+#include<string.h>
+#include<fcntl.h>
+#include<sys/types.h>
+#include<stdio.h>
+
+#define FIFO_NAME "indian_republic"
+#define FIFO_SEND "send"
+int main(void)
+{
+char s[300];
+int num, fd,fd1;
+mknod(FIFO_SEND, S_IFIFO | 0666, 0);
+printf("waiting for readers...\n");
+fd1 = open(FIFO_SEND, O_WRONLY);
+printf("got a reader--write file name\n");
+gets(s);
+if ((num = write(fd1, s, strlen(s))) == -1)
+perror("write");
+else
+printf("speak: wrote %d bytes\n", num);
+
+close(fd1);
+
+
+return 0;
+}
+

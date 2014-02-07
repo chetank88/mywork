@@ -1,0 +1,12 @@
+#include<stdio.h>
+
+
+int main()
+{
+  int a,v,d;
+  float b,k,l,o,p;
+  char qwe,a,rd;
+
+   printf("hi");
+  return 0;
+}

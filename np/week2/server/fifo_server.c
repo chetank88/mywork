@@ -1,0 +1,53 @@
+#include<unistd.h>
+#include<unistd.h>
+#include<unistd.h>
+#include<errno.h>
+#include<string.h>
+#include<fcntl.h>
+#include<sys/types.h>
+#include<stdio.h>
+
+#define FIFO_NAME "/home/chetan/programs/np/week2/fifo/indian_republic"
+#define FIFO_SEND "/home/chetan/programs/np/week2/fifo/send"
+int main(void)
+{
+char s[300],buff[300];
+int num, fd,fd1;
+
+mknod(FIFO_SEND, S_IFIFO | 0666, 0);
+printf("waiting for writers...\n");
+fd1 = open(FIFO_SEND, O_RDONLY);
+printf("got a writer\n");
+
+if ((num = read(fd1, s, 300)) == -1)
+perror("read");
+else {
+s[num] = '\0';
+printf("filename: read %d bytes: \"%s\"\n", num, s);
+}
+
+close(fd1);
+
+mknod(FIFO_NAME, S_IFIFO | 0666, 0);
+printf("waiting for readers...\n");
+fd = open(FIFO_NAME, O_WRONLY);
+int fp=open(s,O_RDONLY,0666);
+if(fp!=-1)
+{
+  int rd=read(fp,buff,300);
+   buff[rd-1]='\0';
+  printf(" %d %s\n",rd,buff);
+  if ((num = write(fd, buff, strlen(buff))) == -1)
+   perror("write");
+  else
+   printf("speak: wrote %d bytes\n", num);
+}
+close(fd);
+close(fp);
+
+return 0;
+
+
+}
+
+

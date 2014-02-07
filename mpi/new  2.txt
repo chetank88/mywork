@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<mpi.h>
+#include<string.h>
+
+int main(int argc,char** argv)
+{
+	MPI_Status status;
+	int size,rank;
+	MPI_Init(&argc, &argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+
+	if(rank==0)
+	{
+		int i;
+		char buff[]={"chetan"};
+		 for(i=1;i<size;i++)
+		 {
+			 MPI_Ssend(buff,strlen(buff)+1,MPI_CHAR,i,0,MPI_COMM_WORLD);
+		 }
+	}
+	else
+	{
+		char nbuff[50];
+		int n=7;
+		MPI_Recv(nbuff,n,MPI_CHAR,0,0,MPI_COMM_WORLD,&status);
+		printf("[%d]: received, buf is %s\n", rank, nbuff);
+	}
+	MPI_Finalize();
+
+}

@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+void strc(char *sorc,char *dest,int i,int j)
+{
+	int k=0;
+	while(i<=j)
+	{
+		dest[k++]=sorc[i++];
+	}
+	dest[k]='\0';
+}
+
+int main ()
+{
+	
+ 	FILE *fout=fopen("hellof.c","r");
+char key[][]={"for","if","int", "float","else","return"};
+ 
+  char str[100];
+  char pch[100];
+  int i=0;
+  int j=0;
+int k=0
+int flag=0;
+  while(!feof(fout))
+  {
+	  i=0,j=0;
+	  
+	
+    //printf("%s",pch);
+	  fgets(str,100,fout);
+  while (i<strlen(str))
+  {
+    strc(str,pch,i,j);
+    //printf("%s",pch);
+for( k=0;k<6;k++)
+{
+	if(strcmp(pch,key[k])==0)
+		{
+		printf("%s\n",key[k]);
+		i=j+1;
+		j=i;
+		//printf("%d\n%d",i,j);
+                 flag=1;
+	   }
+		
+}if(flag==0)
+		{
+			j++;
+		//printf("<ID>");
+	
+	    }
+   }
+}
+  
+  return 0;
+}
+
