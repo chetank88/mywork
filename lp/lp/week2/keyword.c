@@ -213,7 +213,7 @@ void printToken(char tok[])
 
 void opCount(int x)
 {
-    int i,j;
+    int i,j,k,flag=0;
     char type[30];
     char tokGen[30]="";
     char ita[10];
@@ -225,7 +225,26 @@ void opCount(int x)
       int c=checkId(&head,&tail,tok[i]);
         if(c==0)
          {
-            printToken(tok[i]);
+            for(j=0;j<noOfOperators;j++)
+            {
+              if(strcmp(op[j],tok[i])==0)
+               {
+                 for(k=0;k<noOfOperators;k++)
+                   if(strcmp(op[k],tok[i+1])==0)
+                   {
+                       strcat(tokGen,op[j]);
+                       strcat(tokGen,op[k]);
+                       printToken(tokGen);
+                       strcpy(tokGen,"");
+                        flag==1;
+                        i+=2;
+                        break;
+                   }
+
+             }
+            }
+            if(flag==0)
+              printToken(tok[i]);
          }
          else
          {
