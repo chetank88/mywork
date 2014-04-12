@@ -1,0 +1,116 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+FILE *fp,*fp2;
+char tok[32];
+
+char* getToken()
+{
+  
+  fscanf(fp,"%s",tok);
+  
+  return tok;
+  
+}
+
+int checkSym(char *ptr)//check symbol table for an entry of the token
+{
+   int x=strlen(ptr);
+   
+   if(x<2)return 0;
+   else
+   {
+     if(ptr[0]=='i')
+      {
+        if(ptr[1]=='d')
+          return 1;
+        else
+          return 0;
+      }
+     else return 0;
+   }
+    
+}
+
+void Program()
+{
+   char *ptr=getToken();
+   int c=checkSym(ptr);
+  
+   if(c==0 && strcmp(ptr,"int")==0)
+   {
+     printf("\n%s ",ptr);
+     ptr=getToken();
+     c=checkSym(ptr);
+     if(c==1)
+      {
+           printf("%s ",ptr);
+           ptr=getToken();
+           c=checkSym(ptr);
+            
+            if(c==0 && strcmp(ptr,"(")==0)
+              {
+                   printf("%s ",ptr);
+                   ptr=getToken();
+                   c=checkSym(ptr);
+                  
+                     if(c==0 && strcmp(ptr,")")==0)
+                      {
+                            printf("%s ",ptr);
+                             ptr=getToken();
+                             c=checkSym(ptr);
+			 if(c==0 && strcmp(ptr,"{")==0)
+                           {
+				declarations();
+				statment_list();
+                                ptr=getToken();
+                                c=checkSym(ptr);
+				  if(c==0 && strcmp(ptr,"}")==0)
+                                  {
+				    printf("%s ",ptr);return;
+                                  }
+                                  else
+                                   {
+				    printf("\n} expected");exit(-1);   
+			           }
+                                //need to put the condition for ending }
+			   }
+			else
+			  {
+                             printf("\n{ expected");exit(-1);   
+			  }
+                      }
+                     else
+                       {
+		        printf("\n) expected");exit(-1);
+                       }
+
+
+              }
+            else
+              {
+                 printf("\n( expected");exit(-1);
+              }
+         
+      }
+     else
+      {
+        printf("\nmain required");exit(-1);
+      }
+   }
+  else
+  {
+    printf("\ninvalid type");exit(-1);
+  }
+}
+
+int main()
+{
+  fp=fopen("token.txt","r");
+  fp2=fopen("symb.txt","r");
+
+  Program();
+   
+  return 0;
+}

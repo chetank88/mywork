@@ -1,0 +1,28 @@
+%{
+int c=0;
+%}
+
+%%
+[+]?[1-9][0-9]* c=1;
+[1-9][0-9]*[.][0-9][0-9]* c=2;
+[-][1-9][0-9]* c=3;
+[-][1-9][0-9]*[.][0-9][0-9]* c=4;
+%%
+
+int main()
+{
+yylex();
+if(c==1)
+printf("positive number");
+else if(c==2)
+printf("positive fraction");
+else if(c==3)
+printf("negative number");
+else if(c==4)
+printf("negative fraction");
+}
+yywrap()
+{
+return 1;
+}
+

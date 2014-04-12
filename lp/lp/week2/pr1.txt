@@ -1,15 +1,11 @@
 int main()
 {
-  int a,v,d;
+  int a,v;
   float b,k,l,o,p;
   char qwe,lk,rd;
    a=5;
-   printf("hi");
-   printf("bye");
-   
-   if(a==5)
-     d=a;
+ if(a==5)
+ d=a;
 	else
 	l=o;
-  return 0;
-}
+ }

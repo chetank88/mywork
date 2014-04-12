@@ -3,6 +3,7 @@
 #include<stdlib.h>
 
 char key[][10]={"short","int","long","float","double","char","if","else","for","while","do","switch","case","break"};
+char datatypes[][10]={"short","int","long","float","double","char"};
 char op[][10]={"+","-","/","*","%","<",">","!","&","|","?",":","=","^"};
 int noOfKeyWords=14;
 int noOfOperators=14;
@@ -52,7 +53,7 @@ int check(char sc)
   return 0;
 }
 
-int token(FILE* fp,char tok[][300])
+int token(FILE* fp)
 {
   char sc;
   int x=0,y=0,eof;
@@ -74,10 +75,10 @@ int token(FILE* fp,char tok[][300])
         }
          if(y!=0)
             {
-                tok[x][y]='\0';printf("\n%s",tok[x]);x++;y=0;
+                tok[x][y]='\0';x++;y=0;
                 if(sc!=' ' && sc!='\n' && sc!='"' && sc!='\t' )
                     {
-                        tok[x][y++]=sc;tok[x][y]='\0';printf("\n%s",tok[x]);x++;y=0;
+                        tok[x][y++]=sc;tok[x][y]='\0';x++;y=0;
                     }
           }
           else
@@ -86,7 +87,7 @@ int token(FILE* fp,char tok[][300])
               if(sc!=' ' && sc!='\n' && sc!='"' && sc!='\t' )
               {
                 tok[x][y++]=sc;
-                tok[x][y]='\0';printf("\n%s",tok[x]);x++;y=0;
+                tok[x][y]='\0';x++;y=0;
               }
           }
 
@@ -164,6 +165,7 @@ void createSymbolTable(int sl,char attr[][30],list* head,list* tail)
 
 void display(list* head,list* tail)
 {
+    printf("\n\nSymbol Table :\n");
   list *temp=(struct list*)malloc(sizeof(struct list));
 
   temp=head->next;
@@ -217,7 +219,7 @@ void opCount(int x)
     char type[30];
     char tokGen[30]="";
     char ita[10];
-    printf("\noperators:%d\n",countop);
+    printf("\n\noperators:%d\n",countop);
 
 
     for(i=0;i<x;i++)
@@ -249,14 +251,17 @@ void opCount(int x)
          else
          {
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(c,ita,10));
+                        //strcat(tokGen,itoa(c,ita,10));
+                         snprintf(ita,10,"%d",c);
+                         strcat(tokGen,ita);
+                         //strcat(tokGen,snprintf(ita,"%d",c));
                          printToken(tokGen);
                          strcpy(tokGen,"");
          }
       for(j=0;j<noOfKeyWords;j++)
         if(strcmp(key[j],tok[i])==0 && strcmp(tok[i+2],"(")!=0 && strcmp("if",tok[i])!=0)
          {
-           if(strcmp(tok[i+2],";")==0 || strcmp(tok[i+4],";")==0)
+           if(strcmp(tok[i+2],";")==0 || strcmp(tok[i],"else")==0)
            {
                 //printf("\n%s %s",tok[i],tok[i+1]);
                 int c=checkId(&head,&tail,tok[i+1]);
@@ -267,7 +272,9 @@ void opCount(int x)
                          strcpy(attr[1],tok[i]);
                          createSymbolTable(sl++,attr,&head,&tail);
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(sl-1,ita,10));
+                         //strcat(tokGen,itoa(sl-1,ita,10));
+                         snprintf(ita,10,"%d",sl-1);
+                         strcat(tokGen,ita);
                          printToken(tokGen);
                          strcpy(tokGen,"");
 
@@ -288,7 +295,9 @@ void opCount(int x)
                          strcpy(attr[1],type);
                          createSymbolTable(sl++,attr,&head,&tail);
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(sl-1,ita,10));
+                         //strcat(tokGen,itoa(sl-1,ita,10));
+                         snprintf(ita,10,"%d",sl-1);
+                         strcat(tokGen,ita);
                          printToken(tokGen);
                          strcpy(tokGen,"");
                       }
@@ -307,7 +316,9 @@ void opCount(int x)
                          createSymbolTable(sl++,attr,&head,&tail);
                             //strcat(tokGen,"<");
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(sl-1,ita,10));
+                         //strcat(tokGen,itoa(sl-1,ita,10));
+                         snprintf(ita,10,"%d",sl-1);
+                         strcat(tokGen,ita);
                          //strcat(tokGen,">");
                          //strcat(tokGen,"\0");
                          //printf("%s ",tokGen);
@@ -331,7 +342,9 @@ void opCount(int x)
                          strcpy(attr[1],type);
                          createSymbolTable(sl++,attr,&head,&tail);
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(sl-1,ita,10));
+                         //strcat(tokGen,itoa(sl-1,ita,10));
+                         snprintf(ita,10,"%d",sl-1);
+                         strcat(tokGen,ita);
                          printToken(tokGen);
                          strcpy(tokGen,"");
                       }
@@ -350,7 +363,9 @@ void opCount(int x)
                          strcpy(attr[1],tok[i]);
                          createSymbolTable(sl++,attr,&head,&tail);
                          strcat(tokGen,"id,");
-                         strcat(tokGen,itoa(sl-1,ita,10));
+                         //strcat(tokGen,itoa(sl-1,ita,10));
+                         snprintf(ita,10,"%d",sl-1);
+                         strcat(tokGen,ita);
                          printToken(tokGen);
                          strcpy(tokGen,"");
                          i++;
@@ -374,7 +389,7 @@ int main()
 fp=fopen("pr1.txt","r");
 if(fp!=NULL)
 {
-  int x= token(fp,tok);
+  int x= token(fp);
 
 
     keyWordCount(x);
