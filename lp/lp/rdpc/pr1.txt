@@ -9,7 +9,7 @@ int main()
     else
       a=v; ;
     else
-        a=9
+        a=9;
         qwe=lk; ;
 
 }
