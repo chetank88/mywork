@@ -1,0 +1,15 @@
+int main()
+{
+  int a,v;
+  char qwe,lk;
+   a=5;
+   if(a==5)
+    if(b==9)
+     v=a;
+    else
+      a=v; ;
+    else
+        a=9;
+        qwe=lk; ;
+
+}
