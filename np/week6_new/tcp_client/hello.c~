@@ -1,0 +1,7 @@
+#include<stdio.h>
+
+int main()
+{
+  printf("AS YOU SOW SO SHALL YOU REAP");
+  return 0;
+}
