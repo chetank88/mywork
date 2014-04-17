@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
 DEPS = serverh.h
-OBJ = main.o serverTCP.o
+OBJ = main.o server1.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

@@ -18,7 +18,7 @@ void createAndBind()
 	  perror("Socket");
 	  exit(-1);
 	}
-	memset(servaddr.sin_zero,'\0',sizeof(servaddr.sin_zero));
+//	memset(servaddr.sin_zero,'\0',sizeof(servaddr.sin_zero));
 	printf("\n Enter the port no:");
 	scanf("%d",&port);
 	//printf("\n Port No is %d",port);
