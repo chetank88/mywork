@@ -1,16 +1,10 @@
-nt main()
+int main()
 {
   int a,v;
   char qwe,lk;
    a=5;
-   if(a==5)
-    if(b==9)
-     v=a;
-    else
-      a=v; ;
-    else
-        a=9;
-        qwe=l;
-
-
+  if(a==9)
+  if(v==9)
+  if(lk==a)
+  v=0;
 }
