@@ -4,7 +4,7 @@ int w=0;
 int sp=0;
 int c=0;
 %}
-character [qwertyuioplkjhgfsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM]
+character [a-zA-Z]
 %%
 [\n] l++;
 [ ] sp++,w=sp+1;
